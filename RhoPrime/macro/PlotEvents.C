@@ -1,4 +1,4 @@
-#include "DefineColumnsEvents.C"
+#include "DefineColumnsEvents.cxx"
 #include "TCanvas.h"
 #include "TError.h"
 #include "TH1D.h"
@@ -47,15 +47,15 @@ void PlotEvents()
   // ROOT::EnableImplicitMT();
   // detectors::v0Ind = 5;
 
-  TString file1 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/rho/data/2015/pvn/"
+  TString file1 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2015/pvn/"
                   "ccup8.sel.new.root";
-  TString file2 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/rho/data/2015/pvn/"
+  TString file2 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2015/pvn/"
                   "ccup9.sel.new.root";
-  TString file3 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/rho/data/2018/pvn/"
+  TString file3 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2018/pvn/"
                   "ccup29.sel.new.root";
-  TString file4 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/rho/data/2018/pvn/"
+  TString file4 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2018/pvn/"
                   "ccup30.sel.new.root";
-  TString file5 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/rho/data/2018/pvn/"
+  TString file5 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2018/pvn/"
                   "ccup31.sel.new.root";
 
   /////////////////////////////////JPSI////////////////////////////////////////
@@ -91,8 +91,8 @@ void PlotEvents()
   //                 TString("pe"), 100, 0, 2);
   // hSig = PlotHist("Pt2015CUP8Sig", kinematics::calc::ptSig, file1.Data(),
   //                 TString("pe"), 100, 0, 2);
-  // h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
-  //               TString("pe"), 100, 0, 2);
+  //  h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
+  //  TString("pe"), 100, 0, 2);
   h2 = PlotHist("Pt2015CUP9", kinematics::calc::ptTotal, file2.Data(),
                 TString("pe"), 100, 0, 2);
   // h3 = PlotHist("Pt2018CUP29", kinematics::calc::ptTotal, file3.Data(),
