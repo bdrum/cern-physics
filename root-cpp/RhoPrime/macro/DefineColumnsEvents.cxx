@@ -20,6 +20,9 @@ namespace kinematics
   typedef std::pair<int, int> intPair;
 
   static int netChargeValue = 0;
+  static bool ZeroCharge = true;
+  static float pt_min = 0;
+  static float pt_max = 2;
 
   enum calc
   {
@@ -93,8 +96,14 @@ namespace kinematics
         break;
     }
 
-    if (nGoodTracks != 4 || std::abs(netCharge) != netChargeValue)
+    if (nGoodTracks != 4)
       return -1.;
+
+    if (ZeroCharge)
+    {
+        if (std::abs(netCharge) != 0)
+            return -1.;
+    }
 
     for (auto i = 0; i < posTracks.size(); ++i)
     {
@@ -152,7 +161,7 @@ namespace kinematics
     }
     case total:
     {
-      if (ttlVec.Pt() > 0.15)
+      if (ttlVec.Pt() >= pt_max && ttlVec.Pt() < pt_min )
         return -1.;
 
       return ttlVec.M();

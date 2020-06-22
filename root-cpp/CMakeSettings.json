@@ -13,7 +13,13 @@
       "inheritEnvironments": [ "linux_clang_x64" ],
       "wslPath": "C:\\Users\\bdrum\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe",
       "addressSanitizerRuntimeFlags": "detect_leaks=0",
-      "variables": [],
+      "variables": [
+        {
+          "name": "CMAKE_INSTALL_PREFIX",
+          "value": "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/dev/physics/root-cpp/out/install/WSL-Clang-Debug",
+          "type": "PATH"
+        }
+      ],
       "remoteCopyUseCompilerDefaults": false
     }
   ]

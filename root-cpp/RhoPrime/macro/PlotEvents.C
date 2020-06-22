@@ -11,12 +11,13 @@
 #include "TStopwatch.h"
 #include "TStyle.h"
 #include <ROOT/RDataFrame.hxx>
+#include "TString.h"
 
 void DrawOnNewCanvas(TH1D *h);
 
 void PlotEvents();
 
-TH1D PlotHist(TString col1Name, kinematics::calc var, TString file,
+TH1D PlotHist(TString col1Name, TString title, kinematics::calc var, TString file,
               TString drawOption, Int_t bins, Double_t xLow, Double_t xUp);
 
 TH2D PlotHist2D(TString name, TString title, TString col1Name, TString col2Name,
@@ -83,7 +84,7 @@ void PlotEvents()
   //               100, 0, 2);
   /////////////////////////////////PWA///////////////////////////////////////
 
-  showDraw = true;
+  //showDraw = true;
 
   /////////////////////////////////PT////////////////////////////////////////
 
@@ -91,31 +92,32 @@ void PlotEvents()
   //                 TString("pe"), 100, 0, 2);
   // hSig = PlotHist("Pt2015CUP8Sig", kinematics::calc::ptSig, file1.Data(),
   //                 TString("pe"), 100, 0, 2);
-  //  h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
-  //  TString("pe"), 100, 0, 2);
-  h2 = PlotHist("Pt2015CUP9", kinematics::calc::ptTotal, file2.Data(),
-                TString("pe"), 100, 0, 2);
-  // h3 = PlotHist("Pt2018CUP29", kinematics::calc::ptTotal, file3.Data(),
-  //               TString("pe"), 100, 0, 2);
-  // h4 = PlotHist("Pt2018CUP30", kinematics::calc::ptTotal, file4.Data(),
-  //               TString("pe"), 100, 0, 2);
-  // h5 = PlotHist("Pt2018CUP31", kinematics::calc::ptTotal, file5.Data(),
-  //               TString("pe"), 100, 0, 2);
+  /*  h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
+                 TString("pe"), 100, 0, 2);
+    h2 = PlotHist("Pt2015CUP9", kinematics::calc::ptTotal, file2.Data(),
+                 TString("pe"), 100, 0, 2);
+    h3 = PlotHist("Pt2018CUP29", kinematics::calc::ptTotal, file3.Data(),
+                 TString("pe"), 100, 0, 2);
+    h4 = PlotHist("Pt2018CUP30", kinematics::calc::ptTotal, file4.Data(),
+                 TString("pe"), 100, 0, 2);
+    h5 = PlotHist("Pt2018CUP31", kinematics::calc::ptTotal, file5.Data(),
+                 TString("pe"), 100, 0, 2);*/
 
   /////////////////////////////////PT////////////////////////////////////////
-  return;
-  /////////////////////////////////MASS////////////////////////////////////////
-
-  // h1 = PlotHist("Mass2015CUP8", kinematics::calc::total, file1.Data(),
-  //               TString("pe"), 100, 0.5, 3.5);
-  // h2 = PlotHist("Mass2015CUP9", kinematics::calc::total, file2.Data(),
-  //               TString("pe"), 100, 0.5, 3.5);
-  // h3 = PlotHist("Mass2018CUP29", kinematics::calc::total, file3.Data(),
-  //               TString("pe"), 100, 0.5, 3.5);
-  // h4 = PlotHist("Mass2018CUP30", kinematics::calc::total, file4.Data(),
-  //               TString("pe"), 100, 0.5, 3.5);
-  // h5 = PlotHist("Mass2018CUP31", kinematics::calc::total, file5.Data(),
-  //               TString("pe"), 100, 0.5, 3.5);
+  //return;
+  /////////////////////////////////MASS - zerocharge////////////////////////////////////////
+  kinematics::pt_min = 0;
+   kinematics::pt_max = 150;
+   h1 = PlotHist("Mass2015CUP8", TString::Format("Mass2015CUP8 pt_min=%f, pt_max=%f, ZeroCharge=%d",kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file1.Data(),
+                 TString("pe"), 100, 0.5, 3.5);
+   h2 = PlotHist("Mass2015CUP9", TString::Format("Mass2015CUP9  pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file2.Data(),
+                 TString("pe"), 100, 0.5, 3.5);
+   h3 = PlotHist("Mass2018CUP29", TString::Format("Mass2018CUP29 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file3.Data(),
+                 TString("pe"), 100, 0.5, 3.5);
+   h4 = PlotHist("Mass2018CUP30", TString::Format("Mass2018CUP30 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file4.Data(),
+                 TString("pe"), 100, 0.5, 3.5);
+   h5 = PlotHist("Mass2018CUP31", TString::Format("Mass2018CUP31 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file5.Data(),
+                 TString("pe"), 100, 0.5, 3.5);
 
   /////////////////////////////////MASS////////////////////////////////////////
 
@@ -172,7 +174,7 @@ void DrawHists(std::vector<TH1D> &hArr)
                                   hArr[0].GetNbinsX())));
 }
 
-TH1D PlotHist(TString col1Name, kinematics::calc var, TString file,
+TH1D PlotHist(TString col1Name, TString title, kinematics::calc var, TString file,
               TString drawOption, Int_t bins, Double_t xLow, Double_t xUp)
 {
   kinematics::variant = var;
@@ -186,7 +188,10 @@ TH1D PlotHist(TString col1Name, kinematics::calc var, TString file,
   //0, \
   //360);
 
-  ROOT::RDF::TH1DModel histModel(col1Name.Data(), col1Name.Data(), bins, xLow,
+  if (title.IsNull())
+      title = col1Name;
+
+  ROOT::RDF::TH1DModel histModel(col1Name.Data(), title.Data(), bins, xLow,
                                  xUp);
 
   auto hist =
@@ -205,7 +210,7 @@ TH1D PlotHist(TString col1Name, kinematics::calc var, TString file,
 
   if (showDraw)
   {
-    auto c = new TCanvas(col1Name.Data(), col1Name.Data());
+    auto c = new TCanvas(col1Name.Data(), title.Data());
     hist.OnPartialResult(10000, [&](TH1D &hist_) {
       c->cd();
       hist_.Draw(drawOption.Data());
