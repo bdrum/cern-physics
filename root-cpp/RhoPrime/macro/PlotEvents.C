@@ -84,7 +84,7 @@ void PlotEvents()
   //               100, 0, 2);
   /////////////////////////////////PWA///////////////////////////////////////
 
-  //showDraw = true;
+  showDraw = true;
 
   /////////////////////////////////PT////////////////////////////////////////
 
@@ -92,43 +92,43 @@ void PlotEvents()
   //                 TString("pe"), 100, 0, 2);
   // hSig = PlotHist("Pt2015CUP8Sig", kinematics::calc::ptSig, file1.Data(),
   //                 TString("pe"), 100, 0, 2);
-  /*  h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
+  //  h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
+    //             TString("pe"), 100, 0, 2);
+    h2 = PlotHist("Pt2015CUP9","", kinematics::calc::ptTotal, file2.Data(),
                  TString("pe"), 100, 0, 2);
-    h2 = PlotHist("Pt2015CUP9", kinematics::calc::ptTotal, file2.Data(),
-                 TString("pe"), 100, 0, 2);
-    h3 = PlotHist("Pt2018CUP29", kinematics::calc::ptTotal, file3.Data(),
-                 TString("pe"), 100, 0, 2);
-    h4 = PlotHist("Pt2018CUP30", kinematics::calc::ptTotal, file4.Data(),
-                 TString("pe"), 100, 0, 2);
-    h5 = PlotHist("Pt2018CUP31", kinematics::calc::ptTotal, file5.Data(),
-                 TString("pe"), 100, 0, 2);*/
+   // h3 = PlotHist("Pt2018CUP29", kinematics::calc::ptTotal, file3.Data(),
+    //             TString("pe"), 100, 0, 2);
+//    h4 = PlotHist("Pt2018CUP30", kinematics::calc::ptTotal, file4.Data(),
+ //                TString("pe"), 100, 0, 2);
+  //  h5 = PlotHist("Pt2018CUP31", kinematics::calc::ptTotal, file5.Data(),
+   //              TString("pe"), 100, 0, 2);*/
 
   /////////////////////////////////PT////////////////////////////////////////
-  //return;
+  return;
   /////////////////////////////////MASS - zerocharge////////////////////////////////////////
-  kinematics::pt_min = 0;
-   kinematics::pt_max = 150;
-   h1 = PlotHist("Mass2015CUP8", TString::Format("Mass2015CUP8 pt_min=%f, pt_max=%f, ZeroCharge=%d",kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file1.Data(),
-                 TString("pe"), 100, 0.5, 3.5);
-   h2 = PlotHist("Mass2015CUP9", TString::Format("Mass2015CUP9  pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file2.Data(),
-                 TString("pe"), 100, 0.5, 3.5);
-   h3 = PlotHist("Mass2018CUP29", TString::Format("Mass2018CUP29 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file3.Data(),
-                 TString("pe"), 100, 0.5, 3.5);
-   h4 = PlotHist("Mass2018CUP30", TString::Format("Mass2018CUP30 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file4.Data(),
-                 TString("pe"), 100, 0.5, 3.5);
-   h5 = PlotHist("Mass2018CUP31", TString::Format("Mass2018CUP31 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file5.Data(),
-                 TString("pe"), 100, 0.5, 3.5);
+// kinematics::pt_min = 0;
+//  kinematics::pt_max = 150;
+//  h1 = PlotHist("Mass2015CUP8", TString::Format("Mass2015CUP8 pt_min=%f, pt_max=%f, ZeroCharge=%d",kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file1.Data(),
+//                TString("pe"), 100, 0.5, 3.5);
+//  h2 = PlotHist("Mass2015CUP9", TString::Format("Mass2015CUP9  pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file2.Data(),
+//                TString("pe"), 100, 0.5, 3.5);
+//  h3 = PlotHist("Mass2018CUP29", TString::Format("Mass2018CUP29 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file3.Data(),
+//                TString("pe"), 100, 0.5, 3.5);
+//  h4 = PlotHist("Mass2018CUP30", TString::Format("Mass2018CUP30 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file4.Data(),
+//                TString("pe"), 100, 0.5, 3.5);
+//  h5 = PlotHist("Mass2018CUP31", TString::Format("Mass2018CUP31 pt_min=%f, pt_max=%f, ZeroCharge=%d", kinematics::pt_min, kinematics::pt_max, kinematics::ZeroCharge), kinematics::calc::total, file5.Data(),
+//                TString("pe"), 100, 0.5, 3.5);
 
   /////////////////////////////////MASS////////////////////////////////////////
 
   // scaling factor from pts - 1.144
   // v.push_back(hBcg);
   // v.push_back(hSig);
-  v.push_back(h1);
-  v.push_back(h2);
-  v.push_back(h3);
-  v.push_back(h4);
-  v.push_back(h5);
+// v.push_back(h1);
+// v.push_back(h2);
+// v.push_back(h3);
+////  v.push_back(h4);
+//   v.push_back(h5);
 
   // DrawHists(v);
   // std::cout << "PlotEvents::Elapsed time: " << stpw.RealTime() << ", sec "
