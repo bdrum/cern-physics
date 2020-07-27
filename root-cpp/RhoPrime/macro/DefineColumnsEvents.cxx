@@ -3,6 +3,7 @@
 #include "Math/Vector4Dfwd.h"
 #include "ROOT/RDataFrame.hxx"
 #include "ROOT/RResultPtr.hxx"
+#include "RtypesCore.h"
 #include "TError.h"
 #include "TH1D.h"
 #include "TLorentzVector.h"
@@ -39,13 +40,14 @@ namespace kinematics
   static bool debug = false;
   static bool Psi2S = false;
 
-  auto Mass(Int_t nTracks, ROOT::VecOps::RVec<Int_t> &HasPointOnITSLayer0,
-            ROOT::VecOps::RVec<Int_t> &HasPointOnITSLayer1,
-            ROOT::VecOps::RVec<Int_t> &StatusAndTPCRefit,
-            ROOT::VecOps::RVec<Int_t> &StatusAndITSRefit,
+  auto Mass(Int_t RunNum, UInt_t PeriodNumber, UInt_t OrbitNumber, UShort_t BunchCrossNumber, 
+            Int_t nTracks, ROOT::VecOps::RVec<Bool_t> &HasPointOnITSLayer0,
+            ROOT::VecOps::RVec<Bool_t> &HasPointOnITSLayer1,
+            ROOT::VecOps::RVec<Bool_t> &StatusAndTPCRefit,
+            ROOT::VecOps::RVec<Bool_t> &StatusAndITSRefit,
             ROOT::VecOps::RVec<Int_t> &TPCNcls,
             ROOT::VecOps::RVec<Float_t> &NumberOfSigmasTPCPion,
-            ROOT::VecOps::RVec<Int_t> &charge, ROOT::VecOps::RVec<Float_t> &px,
+            ROOT::VecOps::RVec<Short_t> &charge, ROOT::VecOps::RVec<Float_t> &px,
             ROOT::VecOps::RVec<Float_t> &py, ROOT::VecOps::RVec<Float_t> &pz,
             ROOT::VecOps::RVec<Float_t> &dca0,
             ROOT::VecOps::RVec<Float_t> &dca1)
@@ -60,24 +62,33 @@ namespace kinematics
     negTracks.reserve(2);
     pairs.reserve(4);
 
+
+    if (debug)
+    {
+      // 246148,5,2543258,878
+      if (!(RunNum == 246148 && PeriodNumber == 5 && OrbitNumber == 2543258 && BunchCrossNumber == 878)) return -1.;
+      std::cout << RunNum << " | " << PeriodNumber << " | " << OrbitNumber << " | " << BunchCrossNumber << std::endl;
+    }
+    std::cout << nTracks << std::endl;
+
     for (auto i = 0; i < nTracks; ++i)
     {
       if (!HasPointOnITSLayer0[i] && !HasPointOnITSLayer1[i])
         continue;
-      if (!StatusAndTPCRefit[i] && !StatusAndITSRefit[i])
-        continue;
+      //if (!StatusAndTPCRefit[i] && !StatusAndITSRefit[i])
+        //continue;
       if (std::abs(dca0[i]) > 3 || std::abs(dca1[i]) > 3)
         continue;
-      if (TPCNcls[i] < 50)
-        continue;
+//      if (TPCNcls[i] < 50)
+//        continue;
 
-      if (std::abs(NumberOfSigmasTPCPion[i]) > 3)
-        continue;
+//      if (std::abs(NumberOfSigmasTPCPion[i]) > 3)
+//        continue;
 
       if (debug)
       {
-        std::cout << "p: " << px[i] << "|" << py[i] << "|" << pz[i] << std::endl;
-        std::cout << "charge: " << charge[i] << std::endl;
+        std::cout << i << ": ITSLayers: " << HasPointOnITSLayer0[i] << ", " << HasPointOnITSLayer1[i] << std::endl;
+        std::cout << i <<  ": Dca: " << dca0[i] << ", " << dca1[i] << std::endl;
       }
 
       if (charge[i] < 0)
@@ -92,8 +103,8 @@ namespace kinematics
 
       // nGoodTracks not more and equal than 4 because in case of more and equal
       // we add events that e.g. could have 5 good tracks!
-      if (nGoodTracks > 4)
-        break;
+      // if (nGoodTracks > 4)
+        // break;
     }
 
     if (nGoodTracks != 4)

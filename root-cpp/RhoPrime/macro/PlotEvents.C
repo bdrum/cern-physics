@@ -44,7 +44,7 @@ void PlotEvents()
 
   kinematics::netChargeValue = 0;
 
-  // kinematics::debug = true;
+   kinematics::debug = true;
   // ROOT::EnableImplicitMT();
   // detectors::v0Ind = 5;
 
@@ -58,6 +58,7 @@ void PlotEvents()
                   "ccup30.sel.new.root";
   TString file5 = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2018/pvn/"
                   "ccup31.sel.new.root";
+  TString oneRun = "/mnt/d/GoogleDrive/Job/cern/Alice/analysis/data/RhoPrime/2015/4Prongs2015o246148SoftCriteria.root";
 
   /////////////////////////////////JPSI////////////////////////////////////////
 
@@ -85,6 +86,8 @@ void PlotEvents()
   /////////////////////////////////PWA///////////////////////////////////////
 
   showDraw = true;
+  h1 = PlotHist("Pt2015CUP9","", kinematics::calc::ptTotal, oneRun.Data(),
+                 TString("pe"), 100, 0, 2);
 
   /////////////////////////////////PT////////////////////////////////////////
 
@@ -94,8 +97,8 @@ void PlotEvents()
   //                 TString("pe"), 100, 0, 2);
   //  h1 = PlotHist("Pt2015CUP8", kinematics::calc::ptTotal, file1.Data(),
     //             TString("pe"), 100, 0, 2);
-    h2 = PlotHist("Pt2015CUP9","", kinematics::calc::ptTotal, file2.Data(),
-                 TString("pe"), 100, 0, 2);
+//    h2 = PlotHist("Pt2015CUP9","", kinematics::calc::ptTotal, file2.Data(),
+//                 TString("pe"), 100, 0, 2);
    // h3 = PlotHist("Pt2018CUP29", kinematics::calc::ptTotal, file3.Data(),
     //             TString("pe"), 100, 0, 2);
 //    h4 = PlotHist("Pt2018CUP30", kinematics::calc::ptTotal, file4.Data(),
@@ -180,7 +183,7 @@ TH1D PlotHist(TString col1Name, TString title, kinematics::calc var, TString fil
   kinematics::variant = var;
   std::cout << "PlotHist::Initialising of creating histograms based on " << file
             << std::endl;
-  ROOT::RDataFrame rd("events", file.Data());
+  ROOT::RDataFrame rd("4Prongs/events", file.Data());
 
   //auto profileModel = new ROOT::RDF::TProfile1DModel(TString::Format("%s<=>%s",col1Name.Data(),col2Name.Data()).Data(), \
   //TString::Format("%s<=>%s",col1Title.Data(),col2Title.Data()).Data(), \
@@ -196,10 +199,10 @@ TH1D PlotHist(TString col1Name, TString title, kinematics::calc var, TString fil
 
   auto hist =
       rd.Define(col1Name.Data(), kinematics::Mass,
-                {"nTracks", "HasPointOnITSLayer0", "HasPointOnITSLayer1",
-                 "StatusAndTPCRefit", "StatusAndITSRefit", "TPCNcls",
-                 "NumberOfSigmasTPCPion", "charge", "Px", "Py", "Pz", "dca0",
-                 "dca1"})
+                {"RunNum", "PeriodNumber", "OrbitNumber", "BunchCrossNumber", "nTracks", "T_HasPointOnITSLayer0", "T_HasPointOnITSLayer1",
+                 "T_TPCRefit", "T_ITSRefit", "T_TPCNCls",
+                 "T_NumberOfSigmaTPCPion", "T_Q", "T_Px", "T_Py", "T_Pz", "T_Dca0",
+                 "T_Dca1"})
           .Filter((col1Name + TString(">0")).Data())
           .Histo1D(histModel, col1Name.Data());
 
