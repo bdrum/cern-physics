@@ -1,4 +1,4 @@
-from modules import data, events
+from modules import tree, events
 
 
 def DataInfo():
@@ -8,4 +8,4 @@ def DataInfo():
     print('Tree name:', events.name)
     print('Tree title:', events.title)
     print('Events number:', events.numentries)
-    print('Tracks number', data['nTracks'].sum())
+    print('Tracks number', tree.nTracks.sum())
