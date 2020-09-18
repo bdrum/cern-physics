@@ -14,6 +14,6 @@ ccup9_2015_train = r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4
 events = uproot.open(ccup9_2015)['4Prongs/events']
 # events.show()
 tree = events.arrays('*', namedecode="utf-8",
-                     outputtype=collections.namedtuple, entrystop=10000)
+                     outputtype=collections.namedtuple)  # entrystop=10000)
 # data = events.lazyarrays('*', namedecode="utf-8")
 # print(events.name, events.title, events.numentries, data['nTracks'].sum())
