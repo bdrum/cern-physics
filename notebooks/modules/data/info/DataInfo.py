@@ -1,5 +1,4 @@
 from modules import tree, events, ps
-from modules.data.selection.tracks import selectedTracksMask, selectedTracksWithTpcMask
 from modules.physics.kinematics.momentum import GetPtTracks, GetPtEvents
 from IPython.display import display, HTML
 
@@ -14,16 +13,16 @@ def DataInfo():
     print('Tracks number', tree.nTracks.sum())
 
 
-def ShowTracksInEvent(n):
+def ShowTracksInEvent(n, tracksMask):
 
     df = events.pandas.df(["T_Q", "T_P[xyz]", "*Cls", "*Refit", "RunNum", "PeriodNumber",
                            "OrbitNumber", "BunchCrossNumber", "T_Dca1", "T_Dca0",
                            "T_NumberOfSigmaTPCPion"], entrystart=n, entrystop=n+1)
 
-    df.insert(0, "Selected", selectedTracksMask[n])
-    pt = GetPtTracks(selectedTracksMask+True, n).flatten()
+    df.insert(0, "Selected", tracksMask[n])
+    pt = GetPtTracks(tracksMask+True, n).flatten()
     df.insert(5, "T_Pt", pt)
-    pte = GetPtEvents(selectedTracksMask, n)
+    pte = GetPtEvents(tracksMask, n)
     df.insert(6, 'E_Pt4Selected', pte)
 
     display(df)
