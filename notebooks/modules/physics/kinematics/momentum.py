@@ -1,43 +1,37 @@
-from modules import tree, np, plt, hep, events
+from modules import np, pd
 
 
-def GetPtTracks(tracksMask, eventsNumbers):
+def GetPtTracks(tracks):
 
-    pxg = tree.T_Px[tracksMask][eventsNumbers]
-    pyg = tree.T_Py[tracksMask][eventsNumbers]
+    if (type(tracks) != pd.core.frame.DataFrame):
+        print('Input data should be a pd DataFrame')
+        return
 
-    pt = np.sqrt(pxg**2 + pyg**2)
-
-    return pt
-
-
-def GetPTracks(tracksMask, eventsNumbers):
-
-    pxg = tree.T_Px[tracksMask][eventsNumbers]
-    pyg = tree.T_Py[tracksMask][eventsNumbers]
-    pzg = tree.T_Pz[tracksMask][eventsNumbers]
-
-    p = np.sqrt(pxg**2 + pyg**2 + pzg**2)
-
-    return p
+    return np.sqrt(tracks.T_Px**2 + tracks.T_Py**2).to_numpy()
 
 
-def GetPtEvents(tracksMask, eventsNumbers):
+def GetPTracks(tracks):
 
-    pxg = tree.T_Px[tracksMask][eventsNumbers]
-    pyg = tree.T_Py[tracksMask][eventsNumbers]
+    if (type(tracks) != pd.core.frame.DataFrame):
+        print('Input data should be a pd DataFrame')
+        return
 
-    pt = np.sqrt(pxg.sum()**2 + pyg.sum()**2)
-
-    return pt
+    return np.sqrt(tracks.T_Px**2 + tracks.T_Py**2 + tracks.T_Pz**2).to_numpy()
 
 
-def GetPEvents(tracksMask, eventsNumbers):
+def GetPtEvents(tracks):
 
-    pxg = tree.T_Px[tracksMask][eventsNumbers]
-    pyg = tree.T_Py[tracksMask][eventsNumbers]
-    pzg = tree.T_Pz[tracksMask][eventsNumbers]
+    if (type(tracks) != pd.core.frame.DataFrame):
+        print('Input data should be a pd DataFrame')
+        return
 
-    p = np.sqrt(pxg.sum()**2 + pyg.sum()**2 + pzg.sum()**2)
+    return np.sqrt(tracks.groupby('entry').T_Px.sum()**2 + tracks.groupby('entry').T_Py.sum()**2)
 
-    return p
+
+def GetPEvents(tracks):
+
+    if (type(tracks) != pd.core.frame.DataFrame):
+        print('Input data should be a pd DataFrame')
+        return
+
+    return np.sqrt(tracks.groupby('entry').T_Px.sum()**2 + tracks.groupby('entry').T_Py.sum()**2 + tracks.groupby('entry').T_Pz.sum()**2)

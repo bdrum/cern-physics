@@ -2,19 +2,14 @@ import uproot4
 import numpy as np
 import matplotlib.pyplot as plt
 import mplhep as hep
-import pandas as ps
-import awkward1
-import collections
+import pandas as pd
 
-ccup9_2015_my_test = r"D:\GoogleDrive\Job\cern\Alice\analysis\dev\grid\selection\RhoPrime\macro\AnalysisResults.root"
+
 ccup9_2015 = r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015o.root'
-ccup9_2015_train = r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015oTrain.root'
 
-# mycache = uproot.ArrayCache(1024*1024 * 10)
 events = uproot4.open(ccup9_2015)['4Prongs/events']
 # events.show()
-tree = events.arrays(entry_stop=10000)
+# dfs.loc[0] # get dataframe part with entry = 0
 
-# df = events.pandas.df('*', entrystop=10000)
-# data = events.lazyarrays('*', namedecode="utf-8")
-# print(events.name, events.title, events.numentries, data['nTracks'].sum())
+dfs = events.arrays(filter_name=['T_Px', 'T_Py', 'T_Pz',  'T_Q',
+                                 'T_NumberOfSigmaTPCPion', 'T_TPCRefit', 'T_TPCNCls'], library='pd')
