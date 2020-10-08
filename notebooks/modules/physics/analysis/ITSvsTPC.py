@@ -1,8 +1,7 @@
 # https://github.com/bdrum/cern-physics/issues/21
 # https://docs.google.com/presentation/d/1RxAWkZTwhNdXUZpJXh1VQhhu5SjIoxIPGrmtEsBIVr0/edit?usp=sharing
 
-from modules.physics.kinematics.rapidity import GetPseudoRapidityTracks, GetThetaTracks
-from modules.physics.kinematics.momentum import GetPtTracks
+from modules.physics import kinematics
 from modules.data.selection import dfs4Tracks
 from modules import np, plt, pd, hep
 
@@ -20,9 +19,9 @@ EventsWith4TPCTracks = pd.unique(dfs4TracksLowPt.reset_index().entry)[
 AllTPCTracks = dfs4TracksLowPt.loc[EventsWith4TPCTracks]
 
 # find pt, h, theta for such tracks
-AllTPCTracksPt = GetPtTracks(AllTPCTracks)
-AllTPCTracksRap = GetPseudoRapidityTracks(AllTPCTracks)
-AllTPCTracksTheta = GetThetaTracks(AllTPCTracks)
+AllTPCTracksPt = kinematics(AllTPCTracks).TracksVectors.pt
+AllTPCTracksRap = kinematics(AllTPCTracks).TracksVectors.eta
+AllTPCTracksTheta = np.rad2deg(kinematics(AllTPCTracks).TracksVectors.theta)
 
 # now, get events with from 0 to 4 tpc tracks
 EventsWithnTPCTracks = pd.unique(dfs4TracksLowPt.reset_index().entry)[
@@ -31,9 +30,10 @@ NTPCTracks = dfs4TracksLowPt.loc[EventsWithnTPCTracks]
 
 # take only ITS tracks from events with n TPC tracks
 FourDiffNITSTracks = NTPCTracks[~TPCMaskLowPt]
-ITSDiffTPCTracksPt = GetPtTracks(FourDiffNITSTracks)
-ITSDiffTPCTracksRap = GetPseudoRapidityTracks(FourDiffNITSTracks)
-ITSDiffTPCTracksTheta = GetThetaTracks(FourDiffNITSTracks)
+ITSDiffTPCTracksPt = kinematics(FourDiffNITSTracks).TracksVectors.pt
+ITSDiffTPCTracksRap = kinematics(FourDiffNITSTracks).TracksVectors.eta
+ITSDiffTPCTracksTheta = np.rad2deg(
+    kinematics(FourDiffNITSTracks).TracksVectors.theta)
 
 # # take events without TPC tracks
 # ITSOnlyEvents = pd.unique(dfs4TracksLowPt.reset_index().entry)[TPCMaskLowPt.groupby('entry').sum() == 0]
@@ -42,9 +42,9 @@ ITSDiffTPCTracksTheta = GetThetaTracks(FourDiffNITSTracks)
 # ITSOnlyTracksRap =  GetPseudoRapidityTracks(ITSOnlyTracks)
 
 # take total tracks from events with nTPC tracks, n=0,4
-TotalLowPt = GetPtTracks(dfs4TracksLowPt)
-TotalLowPtRap = GetPseudoRapidityTracks(dfs4TracksLowPt)
-TotalLowPtTheta = GetThetaTracks(dfs4TracksLowPt)
+TotalLowPt = kinematics(dfs4TracksLowPt).TracksVectors.pt
+TotalLowPtRap = kinematics(dfs4TracksLowPt).TracksVectors.eta
+TotalLowPtTheta = np.rad2deg(kinematics(dfs4TracksLowPt).TracksVectors.theta)
 
 
 def ShowComparison(param, arrs, units, labels, nBins=100, ranges=(0, 1)):
