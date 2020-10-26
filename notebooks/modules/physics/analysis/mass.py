@@ -1,5 +1,6 @@
-from modules import Rho0, PiPlus, Particle, np, pd
+from modules import Rho0, PiPlus, Particle, np, pd, hep, plt
 from modules.data.selection import GetITSnTPCTracksDF
+from modules.data.validation import IsDataFrame
 
 ITSnTPCTracks = GetITSnTPCTracksDF(2)
 PosFirstTrack = ITSnTPCTracks[ITSnTPCTracks.T_Q > 0].groupby('entry').first()
@@ -13,6 +14,14 @@ assert ((ITSnTPCTracks.loc[217].loc[2] == PosFirstTrack.loc[217]).all() and
         (ITSnTPCTracks.loc[217].loc[3] == PosSecTrack.loc[217]).all() and
         (ITSnTPCTracks.loc[217].loc[1] == NegSecTrack.loc[217]).all()), \
     'Tracks in pairs are not matched with initial data'
+
+
+def GetEventMass(n):
+    tracks = GetITSnTPCTracksDF(n)
+    ETracks = np.sqrt((tracks.T_Px**2 + tracks.T_Py**2 + tracks.T_Pz **
+                       2 + (0.001*PiPlus.mass)**2)).groupby("entry").sum()
+    SumTracks = tracks.groupby("entry").sum()
+    return np.sqrt(ETracks**2 - SumTracks.T_Px**2 - SumTracks.T_Py**2 - SumTracks.T_Pz**2)
 
 
 def GetPairMass(tracks1, tracks2):
@@ -59,3 +68,25 @@ LiteHeavyTotal = pd.DataFrame({
     'Lite': pd.concat([firstComb.min(axis=1), secondComb.min(axis=1)]),
     'Recoil': pd.concat([firstComb.max(axis=1), secondComb.max(axis=1)])
 })
+
+
+def ShowMassComaprison(MassPairs, title):
+
+    IsDataFrame(MassPairs)
+
+    plt.style.use(hep.style.ROOT)
+    fig, ax = plt.subplots(1, 2, figsize=(15, 7))
+    fig.suptitle(title, fontsize=32)
+    _ = ax[0].hist(MassPairs.Lite, bins=100, range=(
+        0, 2), histtype='step', color='blue', linewidth=2, label='lite pair')
+    _ = ax[0].hist(MassPairs.Recoil, bins=100, range=(
+        0, 2), histtype='step', color='red', linewidth=2, label='rest pair')
+    ax[0].set_xlabel('$Mass, GeV$')
+    ax[0].set_ylabel('# events')
+    _ = ax[1].hist2d(MassPairs.Recoil, MassPairs.Lite, bins=(
+        50, 50), range=[(0, 2), (0, 2)], cmap=plt.cm.jet)
+    ax[1].set_ylabel('Lightest pair Mass, GeV')
+    ax[1].set_xlabel('Recoiling pair Mass, GeV')
+    ax[1].yaxis.set_label_position("right")
+    ax[1].yaxis.tick_right()
+    ax[1].legend()
