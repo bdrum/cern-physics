@@ -1,0 +1,110 @@
+
+int nRuns = 124;
+int runList[] = {245145, 245146, 245151, 245152, 245231, 245232, 245259, 245345,
+       245346, 245347, 245349, 245353, 245396, 245397, 245401, 245407,
+       245409, 245410, 245411, 245441, 245446, 245450, 245453, 245454,
+       245496, 245497, 245501, 245504, 245505, 245507, 245540, 245542,
+       245543, 245544, 245545, 245554, 245683, 245692, 245700, 245702,
+       245705, 245775, 245793, 245829, 245831, 245833, 245923, 245949,
+       245952, 245954, 245963, 246001, 246003, 246012, 246036, 246037,
+       246042, 246048, 246049, 246052, 246053, 246087, 246089, 246113,
+       246115, 246148, 246151, 246152, 246153, 246178, 246180, 246181,
+       246182, 246185, 246217, 246222, 246225, 246271, 246272, 246275,
+       246276, 246424, 246428, 246431, 246434, 246487, 246488, 246493,
+       246495, 246675, 246676, 246750, 246751, 246757, 246758, 246759,
+       246760, 246763, 246765, 246766, 246804, 246805, 246807, 246808,
+       246809, 246810, 246844, 246845, 246846, 246847, 246851, 246864,
+       246865, 246867, 246871, 246928, 246945, 246948, 246980, 246982,
+       246984, 246989, 246991, 246994};
+
+void lumi(){
+  gStyle->SetOptStat(0);
+  gStyle->SetLineScalePS(1.5);
+
+  t = new TChain("trending");
+  t->AddFile("trending_merged_PbPb.root");
+  TObjArray* classes = new TObjArray();
+  Double_t  class_lumi[300] = {0};
+  ULong64_t class_lMb[300] = {0};
+  ULong64_t class_l0b[300] = {0};
+  ULong64_t class_l0a[300] = {0};
+  ULong64_t class_l1b[300] = {0};
+  ULong64_t class_l1a[300] = {0};
+  Double_t  class_lifetime[300];
+  Double_t  class_ds[300];
+  Double_t interactionRate = 0;
+  Double_t run_duration = 0;
+  Int_t run;
+  Int_t fill;
+  Int_t bcs;
+  Double_t mu = 0;
+  Double_t lumi_seen;
+  t->SetBranchAddress("mu",&mu);
+  t->SetBranchAddress("run",&run);
+  t->SetBranchAddress("fill",&fill);
+  t->SetBranchAddress("bcs",&bcs);
+  t->SetBranchAddress("classes",&classes);
+  t->SetBranchAddress("class_lumi",&class_lumi);
+  t->SetBranchAddress("class_lMb",&class_lMb);
+  t->SetBranchAddress("class_l0b",&class_l0b);
+  t->SetBranchAddress("class_l0a",&class_l0a);
+  t->SetBranchAddress("class_l1b",&class_l1b);
+  t->SetBranchAddress("class_l1a",&class_l1a);
+  t->SetBranchAddress("class_ds",&class_ds);
+  t->SetBranchAddress("class_lifetime",&class_lifetime);
+  t->SetBranchAddress("interactionRate",&interactionRate);
+  t->SetBranchAddress("lumi_seen", &lumi_seen);
+  t->SetBranchAddress("run_duration", &run_duration);
+  t->BuildIndex("run");
+  Double_t lumi = 0;
+
+  TH1D* hLumi = new TH1D("hLumi","",nRuns,0,nRuns);
+  TH1D* hInteractionRate = new TH1D("hInteractionRate","",nRuns,0,nRuns);
+  TH1D* hMu = new TH1D("hMu","#mu(INEL)",nRuns,0,nRuns);
+
+  int prev = 0;
+  for (Int_t i=0;i<nRuns;i++){
+    Int_t r = runList[i];
+  //  for (Int_t i=295580;i<295754;i++){
+  //    Int_t r = i;
+
+    char* srun = Form("%i",r);
+    t->GetEntryWithIndex(r);
+
+    TString className="CCUP31-U-NOPF-CENTNOTRD";
+    AliTriggerClass* cl = (AliTriggerClass*) classes->FindObject(className.Data());
+
+    if( !cl ) continue;
+
+    Int_t iclass = classes->IndexOf(cl);
+
+    if( class_l0a[iclass] < 0000 || class_l0a[iclass] == prev ) continue;
+    prev = class_l0a[iclass];
+
+    //    std::cout<<runList[i]<<" "<<class_lumi[iclass]<<std::endl;
+    std::cout<<i<<" "<<iclass<<" "<<class_lumi[iclass]<<" "<<class_l0a[iclass]<<" "<<class_l1a[iclass]<<std::endl;
+
+    hLumi->Fill(srun,class_lumi[iclass]);
+
+    hInteractionRate->Fill(srun,interactionRate);
+    hMu->Fill(srun,mu);
+    lumi+=class_lumi[iclass];
+    double val = class_l0b[iclass];
+    double vallum = lumi_seen;
+  }
+  printf("Total lumi = %f\n",lumi);
+
+  hMu->LabelsDeflate("x");
+  for (Int_t i=1;i<=hMu->GetNbinsX();i++){
+    Int_t l = TString(hMu->GetXaxis()->GetBinLabel(i)).Atoi();
+    printf("%i, ",l);
+    if (i%10==0) printf("\n");
+  }
+  printf("\n");
+  //  TFile* f = new TFile("lumi_cmup11.root","recreate");
+  TFile* f = new TFile("tmp.root","recreate");
+  hLumi->Write();
+  hInteractionRate->Write();
+  hMu->Write();
+  f->Close();
+}

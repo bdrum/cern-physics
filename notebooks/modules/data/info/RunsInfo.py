@@ -1,4 +1,4 @@
-from modules import tree, events, plt, np, hep
+from modules import tree, plt, np, hep
 
 
 def ShowRunsInfo():
@@ -19,6 +19,6 @@ def ShowRunsInfo():
     ax = fig.add_axes([0, 0, 1, 1])
     fig.suptitle('4pr events by run', fontsize=32)
     ax.bar(bins, counts, width=5)
-    # ax.set_xticks(bins)
-    # ax.set_xticklabels(bins,rotation=90, rotation_mode="anchor", ha="right")
+    ax.set_xticks(bins)
+    ax.set_xticklabels(bins, rotation=90, rotation_mode="anchor", ha="right")
     plt.show()
