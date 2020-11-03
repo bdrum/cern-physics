@@ -47,16 +47,20 @@ TotalLowPtRap = kinematics(dfs4TracksLowPt).TracksVectors.eta
 TotalLowPtTheta = np.rad2deg(kinematics(dfs4TracksLowPt).TracksVectors.theta)
 
 
-def ShowComparison(param, arrs, units, labels, nBins=100, ranges=(0, 1)):
+def ShowComparison(title, arrs, xlabel, labels, colors, nBins=100, ranges=(0, 1)):
     plt.style.use(hep.style.ROOT)
 
-    fig, axs = plt.subplots(len(arrs), figsize=(15, 7), sharex=True)
-    fig.suptitle(
-        f'tracks {param} from events with total $p_t<0.15$', fontsize=32)
+    l = len(arrs)
 
-    for i in range(len(arrs)):
+    if type(colors) != list:
+        colors = ['black']*l
+
+    fig, axs = plt.subplots(l, figsize=(15, 7), sharex=True)
+    fig.suptitle(title, fontsize=32)
+
+    for i in range(l):
         axs[i].hist(arrs[i], bins=nBins, range=ranges,
-                    color='black', histtype='step', label=labels[i])
+                    color=colors[i], histtype='step', label=labels[i])
         axs[i].legend(prop={'size': 10})
 
-    axs[-1].set_xlabel(f'{param}, {units}')
+    axs[-1].set_xlabel(xlabel)

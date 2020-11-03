@@ -75,7 +75,7 @@ def ShowMassComaprison(MassPairs, title):
     IsDataFrame(MassPairs)
 
     plt.style.use(hep.style.ROOT)
-    fig, ax = plt.subplots(1, 2, figsize=(15, 7))
+    fig, ax = plt.subplots(2, 1, figsize=(10, 10))
     fig.suptitle(title, fontsize=32)
     _ = ax[0].hist(MassPairs.Lite, bins=100, range=(
         0, 2), histtype='step', color='blue', linewidth=2, label='lite pair')
