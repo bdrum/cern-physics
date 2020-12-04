@@ -18,11 +18,11 @@ def GetPairs(tracks):
     NegSecTrack = tracks[tracks.T_Q < 0].groupby('entry').last()
 
     # test for matching taken tracks and their positions in the inital data
-    assert ((tracks.loc[217].loc[2] == PosFirstTrack.loc[217]).all() and
-            (tracks.loc[217].loc[0] == NegFirstTrack.loc[217]).all() and
-            (tracks.loc[217].loc[3] == PosSecTrack.loc[217]).all() and
-            (tracks.loc[217].loc[1] == NegSecTrack.loc[217]).all()), \
-        'Tracks in pairs are not matched with initial data'
+    # assert ((tracks.loc[217].loc[2] == PosFirstTrack.loc[217]).all() and
+    #         (tracks.loc[217].loc[0] == NegFirstTrack.loc[217]).all() and
+    #         (tracks.loc[217].loc[3] == PosSecTrack.loc[217]).all() and
+    #         (tracks.loc[217].loc[1] == NegSecTrack.loc[217]).all()), \
+    #     'Tracks in pairs are not matched with initial data'
 
     # get first possible combinations of pairs
     FirstPairMass = GetPairMass(PosFirstTrack, NegFirstTrack)
