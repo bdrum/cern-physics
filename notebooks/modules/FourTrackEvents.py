@@ -8,10 +8,14 @@ Rho0 = Particle.from_pdgid(113)
 Pi0 = Particle.from_pdgid(111)
 PiPlus = Particle.from_pdgid(211)
 
+# when my data file size was 500mb work with pandas was comfort, but now the size is 1.5gb and parsing to pandas takes forever and eats all my memory despite on the fact that I have 32gb on my laptop.
+# So I'll move to numpy, but for a start only for data loading.
+
 
 class FourTrackEvents:
-    def __init__(self, path, tree, branches, uprootLibType='pd'):
-        self.orig_events = uproot4.open(path)[tree]
+    def __init__(self, path, tree, branches, uprootLibType='np'):
+        self.orig_events = uproot4.open(
+            path,  object_cache=5000, num_workers=8)[tree]
         self.orig_tracks = self.orig_events.arrays(
             filter_name=branches, library=uprootLibType)  # , entry_stop=100)
 
