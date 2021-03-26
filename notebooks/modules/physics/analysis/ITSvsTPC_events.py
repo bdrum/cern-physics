@@ -26,3 +26,5 @@ def ShowComparisonSame(title, arrs, xlabel, labels, colors, nBins=100, ranges=(0
         ax.add_patch(Rectangle((0, 0.15), 0.15, 900,
                                fc='lightgrey', alpha=0.4))
         ax.text(0.15, 0, "0.15", size=14)
+
+    return fig

@@ -3,24 +3,24 @@ import numpy as np
 import pandas as pd
 from particle import Particle
 
-
 Rho0 = Particle.from_pdgid(113)
 Pi0 = Particle.from_pdgid(111)
 PiPlus = Particle.from_pdgid(211)
 
-# when my data file size was 500mb work with pandas was comfort, but now the size is 1.5gb and parsing to pandas takes forever and eats all my memory despite on the fact that I have 32gb on my laptop.
-# So I'll move to numpy, but for a start only for data loading.
-
 
 class FourTrackEvents:
-    def __init__(self, path, tree, branches, uprootLibType='np'):
-        self.orig_events = uproot4.open(
-            path,  object_cache=5000, num_workers=8)[tree]
-        self.orig_tracks = self.orig_events.arrays(
-            filter_name=branches, library=uprootLibType)  # , entry_stop=100)
+    def __init__(self):
+        self.orig_events = pd.read_parquet(
+            r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015oEvents.parquet')
+        self.orig_tracks = pd.read_parquet(
+            r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015oTracks.parquet')
 
         # 4 tracks events mask
-        # NOTE: may be it's not obviously, but dataframe able to work with mask only in case mask cover whole dataframe. This means I have to find events with four tracks in all events, than events with zero total charge again in all events, and than put mask about charge on the mask about numbers of tracks. In this case e.g. we have 6 tracks in events (four_track_mask is false), but total charge is zero (zq_mask is true). Such event will threw out because of four_track_mask is false.
+        # NOTE: may be it's not obviously, but dataframe able to work with mask only in case mask cover whole dataframe.
+        # This means I have to find events with four tracks in all events, than events with zero total charge again in all events, and than put the zero charge mask  on the 4tracks mask.
+        # In this case e.g. we have 6 tracks in events (four_track_mask is false), but total charge is zero (zq_mask is true).
+        # Such event will threw out because of four_track_mask is false, but it could be a useful event.
+
         self._four_tracks_mask = (
             self.orig_tracks.reset_index().groupby('entry').count() == 4)
 

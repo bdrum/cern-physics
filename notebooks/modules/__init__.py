@@ -6,9 +6,9 @@ import pandas as pd
 from particle import Particle
 
 
-ccup9_2015 = r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015o.root'
+# ccup9_2015 = r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015o.root'
 
-events = uproot4.open(ccup9_2015)['4Prongs/events']
+# events = uproot4.open(ccup9_2015)['4Prongs/events']
 # events.show()
 # dfs.loc[0] # get dataframe part with entry = 0
 
