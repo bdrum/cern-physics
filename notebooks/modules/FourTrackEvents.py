@@ -32,6 +32,11 @@ class FourTrackEvents:
         self._four_tracks_nzq_mask = self._four_tracks_mask[self.orig_tracks.groupby(
             'entry').sum().T_Q != 0]
 
+        self.four_tracks_zq = self.orig_tracks[self._four_tracks_zq_mask].dropna(
+            how='any')
+        self.four_tracks_nzq = self.orig_tracks[self._four_tracks_nzq_mask].dropna(
+            how='any')
+
     @ property
     def four_tracks(self):
         """
@@ -39,19 +44,6 @@ class FourTrackEvents:
         """
         return self.orig_tracks[self._four_tracks_mask].dropna(how='any')
 
-    @ property
-    def four_tracks_zq(self):
-        """
-        Returns only events with four tracks and zero total charge
-        """
-        return self.orig_tracks[self._four_tracks_zq_mask].dropna(how='any')
-
-    @ property
-    def four_tracks_nzq(self):
-        """
-        Returns only events with four tracks and non zero total charge
-        """
-        return self.orig_tracks[self._four_tracks_nzq_mask].dropna(how='any')
 
     @ staticmethod
     def GetTracksWithNTPC(tracks, n=3):

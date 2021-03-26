@@ -87,3 +87,4 @@ def ShowMassComaprison(MassPairs, title):
     # ax[1].yaxis.set_label_position("right")
     ax[1].yaxis.tick_right()
     ax[1].legend()
+    return fig
