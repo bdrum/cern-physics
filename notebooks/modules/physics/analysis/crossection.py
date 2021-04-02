@@ -1,19 +1,17 @@
 import collections
 # from modules.data.selection import GetITSnTPCTracksDF
-from modules import events, np, pd
+from modules import np, pd
 import math
 import json
 from collections import ChainMap
 
 
-def GetCrossSection(tracks):
+def GetCrossSection(runs, tracks):
 
-    runs = events.arrays(filter_name=['RunNum'], library='np')
-
-    runsEventsN = dict(collections.Counter(runs['RunNum'][np.unique(
+    runsEventsN = dict(collections.Counter(runs[np.unique(
         tracks.reset_index().entry.to_numpy())]))
 
-    runsEventsNOrig = dict(collections.Counter(runs['RunNum']))
+    runsEventsNOrig = dict(collections.Counter(runs))
 
     runsLumi = {}
 
