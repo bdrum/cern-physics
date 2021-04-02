@@ -1,9 +1,18 @@
-import uproot4
-from functools import cached_property
 import numpy as np
-from os import name as os_name
 import pandas as pd
+import matplotlib.pyplot as plt
+
+from matplotlib.patches import Rectangle
+
+from functools import cached_property
+from os import name as os_name
+from tqdm import tqdm
 from particle import Particle
+
+
+if os_name == 'posix':
+    import ROOT
+    from array import array
 
 Rho0 = Particle.from_pdgid(113)
 Pi0 = Particle.from_pdgid(111)
@@ -103,4 +112,4 @@ class FourTrackEvents:
         dfsPt = tracks[['T_Px', 'T_Py']]
         dfsPt = np.sqrt(dfsPt.groupby('entry').sum()[
             'T_Px']**2 + dfsPt.groupby('entry').sum()['T_Py']**2)
-        return tracks.loc[dfsPt[(dfsPt < maxPt) * (dfsPt >= minPt)].reset_index().entry]
+        return tracks.loc[dfsPt[(dfsPt < maxPt) & (dfsPt >= minPt)].reset_index().entry]
