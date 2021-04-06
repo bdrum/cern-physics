@@ -9,7 +9,6 @@ from os import name as os_name
 from tqdm import tqdm
 from particle import Particle
 
-
 if os_name == 'posix':
     import ROOT
     from array import array
@@ -20,6 +19,10 @@ PiPlus = Particle.from_pdgid(211)
 
 
 class FourTrackEvents:
+    """
+    The class provided basics analysis features for 4 tracks events.
+    """
+
     def __init__(self):
 
         tracks_path = r'D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015oTracks.parquet'

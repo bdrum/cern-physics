@@ -2,16 +2,47 @@ from modules import PiPlus, np, pd, hep, plt
 from modules.data.validation import IsDataFrame
 
 
-def GetPairMass(tracks1, tracks2):
+def MakePair(tracks1: pd.DataFrame, tracks2: pd.DataFrame) -> pd.DataFrame:
+    """
+    Combine two DataFrames with tracks into one DataFrame with multi index for tracks.
+    """
+    pd.merge(tracks1, tracks2, left_on='entry', right_on='entry')
+    pair = pd.concat([tracks1, tracks2]).sort_index()
+    return pair.set_index(pair.groupby('entry').cumcount(), append=True)
+
+
+def GetPairEnergy(pair: pd.DataFrame) -> pd.Series:
+    """
+    Function pair DataFrame that contains tracks returns Series of total Energies for each pair. 
+    """
     EPair = np.sqrt(tracks1.T_Px**2 + tracks1.T_Py**2 +
                     tracks1.T_Pz**2 + (0.001*PiPlus.mass)**2)
     EPair += np.sqrt(tracks2.T_Px**2 + tracks2.T_Py**2 +
                      tracks2.T_Pz**2 + (0.001*PiPlus.mass)**2)
+    return EPair
+
+
+def GetPairEnergy(tracks1: pd.DataFrame, tracks2: pd.DataFrame) -> pd.Series:
+    """
+    Function takes two DataFrames that contains tracks to combine into pairs and returns Series of total Energies of pairs. 
+    """
+    EPair = np.sqrt(tracks1.T_Px**2 + tracks1.T_Py**2 +
+                    tracks1.T_Pz**2 + (0.001*PiPlus.mass)**2)
+    EPair += np.sqrt(tracks2.T_Px**2 + tracks2.T_Py**2 +
+                     tracks2.T_Pz**2 + (0.001*PiPlus.mass)**2)
+    return EPair
+
+
+def GetPairMass(tracks1: pd.DataFrame, tracks2: pd.DataFrame) -> pd.Series:
+    """
+    Function takes two DataFrames that contains tracks to combine into pairs and returns Series of masses of pairs. 
+    """
+    EPair = GetPairEnergy(tracks1, tracks2)
     SPair = tracks1 + tracks2
     return np.sqrt(EPair**2 - SPair.T_Px**2 - SPair.T_Py**2 - SPair.T_Pz**2)
 
 
-def GetPairs(tracks):
+def GetPairsMasses(tracks: pd.DataFrame):
     PosFirstTrack = tracks[tracks.T_Q > 0].groupby('entry').first()
     PosSecTrack = tracks[tracks.T_Q > 0].groupby('entry').last()
     NegFirstTrack = tracks[tracks.T_Q < 0].groupby('entry').first()
@@ -63,6 +94,17 @@ def GetPairs(tracks):
     })
 
     return LiteHeavyRecoil, LiteHeavyTotal
+
+
+def GetAngleDistr(tracks1: pd.DataFrame, tracks2: pd.DataFrame) -> pd.Series:
+    "[Description of what function returns](https://github.com/bdrum/cern-physics/issues/40)"
+    # M_{pair}
+    # m_{\pi}
+    # p_{\pi}
+    # p_{pair}
+    # (\boldsymbol{p_{pi}}\boldsymbol{p_{pair}})
+    # E_{pair}
+    pass
 
 
 def ShowMassComaprison(MassPairs, title):
