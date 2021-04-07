@@ -114,10 +114,10 @@ def ShowMassComaprison(MassPairs, title):
     plt.style.use(hep.style.ROOT)
     fig, ax = plt.subplots(2, 1, figsize=(10, 10))
     fig.suptitle(title, fontsize=32)
-    _ = ax[0].hist(MassPairs.Lite, bins=100, range=(
-        0, 2), histtype='step', color='blue', linewidth=2, label=r'$\pi^+\pi^-$')
-    _ = ax[0].hist(MassPairs.Recoil, bins=100, range=(
-        0, 2), histtype='step', color='red', linewidth=2, label=r'$\rho^0$')
+    _ = ax[0].hist(MassPairs.Lite, bins=50, range=(
+        0, 1.4), histtype='step', color='blue', linewidth=2, label=r'$\pi^+\pi^-$')
+    _ = ax[0].hist(MassPairs.Recoil, bins=50, range=(
+        0, 1.4), histtype='step', color='red', linewidth=2, label=r'$\rho^0$')
     ax[0].set_xlabel('$Mass, GeV$')
     ax[0].set_ylabel('# events')
     ax[0].legend()
