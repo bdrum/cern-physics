@@ -18,7 +18,7 @@ def ShowComparisonSame(title, arrs, xlabel, labels, colors, nBins=100, ranges=(0
 
     for i in range(l):
         ax.hist(arrs[i], bins=nBins, range=ranges,
-                color=colors[i], histtype='step', linewidth=2, label=labels[i]+f' | {(arrs[i] < 0.15).sum()}')
+                color=colors[i], histtype='step', linewidth=2, label=labels[i]) #+f' | {(arrs[i] < 0.15).sum()}')
         ax.legend(prop={'size': 14})
         ax.tick_params(axis='both', which='major', labelsize=10)
         ax.set_xlabel(xlabel, fontdict={'size': 14})
