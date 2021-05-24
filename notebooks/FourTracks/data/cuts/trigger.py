@@ -1,18 +1,21 @@
+from pandas.core.frame import DataFrame
 from FourTracks.data import *
 from tqdm import tqdm
-from os.path import exists
+from os.path import exists, join
 
 
-pth = r"D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015oTriggerEvents.parquet"
+def GetTriggeredEvents(
+    tracks: pd.DataFrame, fileName: str = "", saveToFile: bool = False
+) -> pd.DataFrame:
+    """
+    Method get events with four tracks and check fake trigger events
+    """
 
-if exists(pth):
-    triggered_ft_events = pd.read_parquet(pth)
-else:
-    SaveTriggeredEvents(data.four_tracks_zq)
-    triggered_ft_events = pd.read_parquet(pth)
+    pth = join(r"D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015", fileName)
 
+    if exists(pth) and fileName:
+        return pd.read_parquet(pth)
 
-def SaveTriggeredEvents(tracks):
     # fired FORs numbers for 4 zq tracks
     for_sensors = pd.DataFrame(
         orig_events.FORChip[pd.unique(tracks.reset_index().entry)]
@@ -100,6 +103,7 @@ def SaveTriggeredEvents(tracks):
     tdf = pd.DataFrame(df.index[~df.triggered], columns=["Untriggered"]).join(
         pd.DataFrame(df.index[df.triggered], columns=["Triggered"]), how="left"
     )
-    tdf.to_parquet(
-        r"D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015\4Prongs2015oTriggerEvents.parquet"
-    )
+
+    if saveToFile:
+        tdf.to_parquet(pth)
+    return tdf

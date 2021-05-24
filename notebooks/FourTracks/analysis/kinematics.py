@@ -5,18 +5,18 @@ from particle import Particle
 PiPlus = Particle.from_pdgid(211)
 
 
-def pt_tracks(tracks):
+def pt_tracks(tracks: pd.DataFrame) -> pd.Series:
     return np.sqrt(tracks.T_Px ** 2 + tracks.T_Py ** 2)
 
 
-def pt_events(tracks):
+def pt_events(tracks: pd.DataFrame) -> pd.Series:
     return np.sqrt(
         tracks.T_Px.groupby("entry").sum() ** 2
         + tracks.T_Py.groupby("entry").sum() ** 2
     )
 
 
-def mass_events(tracks):
+def mass_events(tracks: pd.DataFrame) -> pd.Series:
     ETracks = E_events(tracks)
     SumTracks = tracks.groupby("entry").sum()
     return np.sqrt(
@@ -24,7 +24,7 @@ def mass_events(tracks):
     )
 
 
-def E_events(tracks):
+def E_events(tracks: pd.DataFrame) -> pd.Series:
     return (
         np.sqrt(
             (
@@ -39,7 +39,7 @@ def E_events(tracks):
     )
 
 
-def P_events(tracks):
+def P_events(tracks: pd.DataFrame) -> pd.Series:
     return np.sqrt(
         tracks.T_Px.groupby("entry").sum() ** 2
         + tracks.T_Py.groupby("entry").sum() ** 2
@@ -47,7 +47,7 @@ def P_events(tracks):
     )
 
 
-def cos_theta_events(tracks1, tracks2):
+def cos_theta_events(tracks1: pd.DataFrame, tracks2: pd.DataFrame) -> pd.Series:
     p1p2 = (
         tracks1.T_Px.groupby("entry").sum() * tracks2.T_Px.groupby("entry").sum()
         + tracks1.T_Py.groupby("entry").sum() * tracks2.T_Py.groupby("entry").sum()

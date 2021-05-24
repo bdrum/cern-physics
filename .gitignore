@@ -1020,3 +1020,7 @@ Mkfile.old
 dkms.conf
 .ipynb_checkpoints
 .ipynb_checkpoints/*
+*.vs
+.vs*
+.vs/
+.vscode/
