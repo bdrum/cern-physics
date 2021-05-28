@@ -11,23 +11,24 @@ pi_pl_mass = PiPlus.mass / 1000
 bckg_y = None
 
 
-def bw(E: float, M: float, G: float, amp: float) -> Union[np.ndarray, pd.Series]:
+def bw(x: float, M: float, G: float, amp: float) -> Union[np.ndarray, pd.Series]:
     """
     Breit-Wigner function with params
     M - mass of a resonance
     G - $\Gamma$ of a resonance
     amp - amplitude coefficient
+    x - Energy
     """
-    q = np.sqrt((E ** 2) / 4 - pi_pl_mass ** 2)
+    q = np.sqrt((x ** 2) / 4 - pi_pl_mass ** 2)
     q_rho = np.sqrt((M ** 2) / 4 - pi_pl_mass ** 2)
     ratrho1 = ((q / q_rho) ** 3) / ((q / q_rho) ** 2 + 1) * 2
     g_tot = G * ratrho1
-    fff = amp * G * g_tot * E * M / ((E ** 2 - M ** 2) ** 2 + M ** 2 * g_tot ** 2)
+    fff = amp * G * g_tot * x * M / ((x ** 2 - M ** 2) ** 2 + M ** 2 * g_tot ** 2)
 
     return fff
 
 
 def bw_bckg(
-    E: float, M: float, G: float, amp: float, amp_bckg: float
+    x: float, M: float, G: float, amp: float, amp_bckg: float
 ) -> Union[np.ndarray, pd.Series]:
-    return bw(E=E, M=M, G=G, amp=amp) + amp_bckg * bckg_y
+    return bw(x=x, M=M, G=G, amp=amp) + amp_bckg * bckg_y
