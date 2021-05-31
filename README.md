@@ -97,8 +97,68 @@ Tracks:
 ## Transverse momenta of initial data set
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4tr_zq</th>
+      <td>19456.0</td>
+      <td>0.837667</td>
+      <td>12.995872</td>
+      <td>0.000275</td>
+      <td>0.215188</td>
+      <td>0.483686</td>
+      <td>0.846086</td>
+      <td>1726.771484</td>
+    </tr>
+    <tr>
+      <th>4tr_nzq</th>
+      <td>13762.0</td>
+      <td>1.163582</td>
+      <td>12.508871</td>
+      <td>0.010555</td>
+      <td>0.386721</td>
+      <td>0.648763</td>
+      <td>1.049536</td>
+      <td>1328.583740</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
     
-![png](4TracksAnalysis_files/4TracksAnalysis_3_0.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_3_1.png)
     
 
 
@@ -227,8 +287,68 @@ Event called passed ZDC cuts if satisfied such criteria:
 - one of ZDC times not in an interval of +- ZDC_Time_Delta parameter value 
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ZDC &lt; 5TeV | abs(ZDC_times) &gt;100</th>
+      <td>6605.0</td>
+      <td>0.408039</td>
+      <td>2.210536</td>
+      <td>0.000275</td>
+      <td>0.071012</td>
+      <td>0.281112</td>
+      <td>0.548197</td>
+      <td>176.975204</td>
+    </tr>
+    <tr>
+      <th>ZDC &gt; 5TeV &amp; abs(ZDC_times) &lt;=100</th>
+      <td>3032.0</td>
+      <td>0.596154</td>
+      <td>0.887427</td>
+      <td>0.002845</td>
+      <td>0.259760</td>
+      <td>0.495125</td>
+      <td>0.785955</td>
+      <td>42.316540</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
     
-![png](4TracksAnalysis_files/4TracksAnalysis_21_0.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_21_1.png)
     
 
 
@@ -238,7 +358,60 @@ Event called passed ZDC cuts if satisfied such criteria:
 
 
 
-    <matplotlib.legend.Legend at 0x252443f3430>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>orig $p_t$</th>
+      <td>19456.0</td>
+      <td>0.837667</td>
+      <td>12.995872</td>
+      <td>0.000275</td>
+      <td>0.215188</td>
+      <td>0.483686</td>
+      <td>0.846086</td>
+      <td>1726.771484</td>
+    </tr>
+    <tr>
+      <th>$p_t$ all cuts</th>
+      <td>6605.0</td>
+      <td>0.408039</td>
+      <td>2.210536</td>
+      <td>0.000275</td>
+      <td>0.071012</td>
+      <td>0.281112</td>
+      <td>0.548197</td>
+      <td>176.975204</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
@@ -301,7 +474,7 @@ Let's see on the mass distribution of the events
   </thead>
   <tbody>
     <tr>
-      <th>mass_ft_zq</th>
+      <th>ft_zq_all_cuts</th>
       <td>2418.0</td>
       <td>1.613113</td>
       <td>0.390436</td>
@@ -312,7 +485,7 @@ Let's see on the mass distribution of the events
       <td>4.907002</td>
     </tr>
     <tr>
-      <th>mass_ft_nzq</th>
+      <th>ft_nzq_pt_cut</th>
       <td>663.0</td>
       <td>1.413462</td>
       <td>0.563853</td>
@@ -428,53 +601,48 @@ As we can see above, for second case (all possible pairs) we've got stronger sig
 ## Data modeling
 First of all let's try to fit $\rho(0)$ that we can see as heavy pair of final 4 pions state:
 
-    No handles with labels found to put in legend.
+
+    
+![png](4TracksAnalysis_files/4TracksAnalysis_34_0.png)
     
 
 
-
-
-    count    4836.000000
-    mean        0.812236
-    std         0.259066
-    min         0.291725
-    25%         0.674686
-    50%         0.778129
-    75%         0.902377
-    max         3.544038
-    Name: heavy, dtype: float64
-
-
-
-
-    
-![png](4TracksAnalysis_files/4TracksAnalysis_34_2.png)
-    
-
-
-    D:\GoogleDrive\Job\cern\Alice\analysis\dev\physics\notebooks\FourTracks\analysis\fit.py:22: RuntimeWarning: invalid value encountered in sqrt
+    D:\GoogleDrive\Job\cern\Alice\analysis\dev\physics\notebooks\FourTracks\analysis\fit.py:24: RuntimeWarning: invalid value encountered in sqrt
       q = np.sqrt((x ** 2) / 4 - pi_pl_mass ** 2)
-    D:\GoogleDrive\Job\cern\Alice\analysis\dev\physics\notebooks\FourTracks\analysis\fit.py:22: RuntimeWarning: invalid value encountered in sqrt
+    D:\GoogleDrive\Job\cern\Alice\analysis\dev\physics\notebooks\FourTracks\analysis\fit.py:24: RuntimeWarning: invalid value encountered in sqrt
       q = np.sqrt((x ** 2) / 4 - pi_pl_mass ** 2)
     
 
     [[Model]]
-        Model(bw)
+        (Model(bw_bckg, prefix='bw_') + Model(polynomial, prefix='bckg_'))
     [[Fit Statistics]]
         # fitting method   = leastsq
-        # function evals   = 25
+        # function evals   = 30
         # data points      = 98
-        # variables        = 3
-        chi-square         = 109229.377
-        reduced chi-square = 1149.78292
-        Akaike info crit   = 693.591309
-        Bayesian info crit = 701.346212
+        # variables        = 9
+        chi-square         = 6005.22121
+        reduced chi-square = 67.4743956
+        Akaike info crit   = 421.310875
+        Bayesian info crit = 444.575582
     ##  Warning: uncertainties could not be estimated:
-        amp:  at initial value
+        bw_G:         at initial value
+        bw_amp:       at initial value
+        bckg_c0:      at initial value
+        bckg_c1:      at initial value
+        bckg_c3:      at initial value
+        bckg_c4:      at initial value
+        bckg_c5:      at initial value
     [[Variables]]
-        M:    0.76953266 (init = 0.77)
-        G:    0.44949013 (init = 0.45)
-        amp:  100.000000 (init = 100)
+        bw_M:         0.76755874 (init = 0.77)
+        bw_G:         0.15000000 (init = 0.15)
+        bw_amp:       165.000000 (init = 165)
+        bw_amp_bckg:  0 (fixed)
+        bckg_c0:     -138.848812 (init = -138.8488)
+        bckg_c1:      739.990410 (init = 739.9904)
+        bckg_c2:     -748.736499 (init = -748.6897)
+        bckg_c3:     -75.0224404 (init = -75.02244)
+        bckg_c4:      358.446762 (init = 358.4468)
+        bckg_c5:     -111.293216 (init = -111.2932)
     
 
 
@@ -484,23 +652,35 @@ First of all let's try to fit $\rho(0)$ that we can see as heavy pair of final 4
 
 
     [[Model]]
-        Model(bw_bckg)
+        (Model(bw_bckg, prefix='bw_') + Model(polynomial, prefix='bckg_'))
     [[Fit Statistics]]
         # fitting method   = leastsq
-        # function evals   = 26
+        # function evals   = 30
         # data points      = 65
-        # variables        = 4
-        chi-square         = 9416.30433
-        reduced chi-square = 154.365645
-        Akaike info crit   = 331.427695
-        Bayesian info crit = 340.125245
+        # variables        = 9
+        chi-square         = 9415.11713
+        reduced chi-square = 168.127092
+        Akaike info crit   = 341.419500
+        Bayesian info crit = 360.988985
     ##  Warning: uncertainties could not be estimated:
-        amp:       at initial value
+        bw_G:         at initial value
+        bw_amp:       at initial value
+        bckg_c0:      at initial value
+        bckg_c1:      at initial value
+        bckg_c2:      at initial value
+        bckg_c4:      at initial value
+        bckg_c5:      at initial value
     [[Variables]]
-        M:         1.50025700 (init = 1.5)
-        G:         0.44560648 (init = 0.45)
-        amp:       90.0000000 (init = 90)
-        amp_bckg:  1.04109842 (init = 0.2)
+        bw_M:         1.53480217 (init = 1.55)
+        bw_G:         0.40000000 (init = 0.4)
+        bw_amp:       110.000000 (init = 110)
+        bw_amp_bckg:  0 (fixed)
+        bckg_c0:     -140.522813 (init = -140.5228)
+        bckg_c1:      545.656453 (init = 545.6565)
+        bckg_c2:     -750.360538 (init = -750.3605)
+        bckg_c3:      509.493396 (init = 509.5222)
+        bckg_c4:     -171.189120 (init = -171.1891)
+        bckg_c5:      22.4927273 (init = 22.49273)
     
 
 
@@ -510,126 +690,55 @@ First of all let's try to fit $\rho(0)$ that we can see as heavy pair of final 4
 
 
     [[Model]]
-        (Model(bw_bckg, prefix='bw1_') + Model(bw_bckg, prefix='bw2_'))
+        ((Model(bw_bckg, prefix='bw1_') + Model(bw_bckg, prefix='bw2_')) + Model(polynomial, prefix='bckg_'))
     [[Fit Statistics]]
         # fitting method   = leastsq
-        # function evals   = 70
+        # function evals   = 65
         # data points      = 65
-        # variables        = 8
-        chi-square         = 7704.23934
-        reduced chi-square = 135.162094
-        Akaike info crit   = 326.384019
-        Bayesian info crit = 343.779117
+        # variables        = 12
+        chi-square         = 7381.36207
+        reduced chi-square = 139.270982
+        Akaike info crit   = 331.601203
+        Bayesian info crit = 357.693850
     ##  Warning: uncertainties could not be estimated:
         bw1_M:         at initial value
         bw1_G:         at initial value
         bw1_amp:       at initial value
         bw2_M:         at initial value
         bw2_G:         at initial value
-        bw2_G:         at boundary
         bw2_amp:       at initial value
+        bckg_c0:       at initial value
+        bckg_c1:       at initial value
+        bckg_c2:       at initial value
+        bckg_c4:       at initial value
+        bckg_c5:       at initial value
     [[Variables]]
         bw1_M:         1.45000000 (init = 1.45)
-        bw1_G:         0.35000000 (init = 0.35)
-        bw1_amp:       80.0000000 (init = 80)
-        bw1_amp_bckg:  0.40223250 (init = 1)
-        bw2_M:         1.65000000 (init = 1.65)
-        bw2_G:         0.25000000 (init = 0.25)
-        bw2_amp:       35.0000000 (init = 35)
-        bw2_amp_bckg:  0.65405888 (init = 5)
+        bw1_G:         0.30000000 (init = 0.3)
+        bw1_amp:       90.0000000 (init = 90)
+        bw1_amp_bckg:  0 (fixed)
+        bw2_M:         1.70000000 (init = 1.7)
+        bw2_G:         0.40000000 (init = 0.4)
+        bw2_amp:       40.0000000 (init = 40)
+        bw2_amp_bckg:  0 (fixed)
+        bckg_c0:      -140.522813 (init = -140.5228)
+        bckg_c1:       545.656453 (init = 545.6565)
+        bckg_c2:      -750.360538 (init = -750.3605)
+        bckg_c3:       509.359668 (init = 509.5222)
+        bckg_c4:      -171.189120 (init = -171.1891)
+        bckg_c5:       22.4927273 (init = 22.49273)
     
 
 
 
 
-    <matplotlib.legend.Legend at 0x25248e08be0>
+    <matplotlib.legend.Legend at 0x2092dbba2e0>
 
 
 
 
     
 ![png](4TracksAnalysis_files/4TracksAnalysis_37_2.png)
-    
-
-
-    [[Model]]
-        Model(polynomial)
-    [[Fit Statistics]]
-        # fitting method   = leastsq
-        # function evals   = 18
-        # data points      = 65
-        # variables        = 5
-        chi-square         = 827.353668
-        reduced chi-square = 13.7892278
-        Akaike info crit   = 175.349924
-        Bayesian info crit = 186.221860
-    ##  Warning: uncertainties could not be estimated:
-        c0:  at initial value
-        c1:  at initial value
-        c2:  at initial value
-        c3:  at initial value
-        c4:  at initial value
-    [[Variables]]
-        c0: -52.0214731 (init = -52.02159)
-        c1:  158.952975 (init = 158.9533)
-        c2: -125.475867 (init = -125.4759)
-        c3:  38.7143145 (init = 38.71442)
-        c4: -4.22387924 (init = -4.223879)
-    
-
-
-
-
-    [<matplotlib.lines.Line2D at 0x25248759670>]
-
-
-
-
-    
-![png](4TracksAnalysis_files/4TracksAnalysis_38_2.png)
-    
-
-
-    [[Model]]
-        ((Model(bw, prefix='bw1_') + Model(bw, prefix='bw2_')) + Model(polynomial, prefix='bckg_'))
-    [[Fit Statistics]]
-        # fitting method   = leastsq
-        # function evals   = 24
-        # data points      = 65
-        # variables        = 11
-        chi-square         = 11899.3006
-        reduced chi-square = 220.357418
-        Akaike info crit   = 360.640096
-        Bayesian info crit = 384.558356
-    ##  Warning: uncertainties could not be estimated:
-        bw1_M:    at initial value
-        bw1_G:    at initial value
-        bw1_amp:  at initial value
-        bw2_M:    at initial value
-        bw2_G:    at initial value
-        bw2_amp:  at initial value
-        bckg_c0:  at initial value
-        bckg_c1:  at initial value
-        bckg_c2:  at initial value
-        bckg_c3:  at initial value
-        bckg_c4:  at initial value
-    [[Variables]]
-        bw1_M:    1.50000000 (init = 1.5)
-        bw1_G:    0.40000000 (init = 0.4)
-        bw1_amp:  85.0000000 (init = 85)
-        bw2_M:    1.65000000 (init = 1.65)
-        bw2_G:    0.20000000 (init = 0.2)
-        bw2_amp:  15.0000000 (init = 15)
-        bckg_c0: -34.8419011 (init = -34.8419)
-        bckg_c1:  105.895125 (init = 105.8951)
-        bckg_c2: -83.9664919 (init = -83.96649)
-        bckg_c3:  26.1691031 (init = 26.1691)
-        bckg_c4: -2.90076667 (init = -2.900767)
-    
-
-
-    
-![png](4TracksAnalysis_files/4TracksAnalysis_39_1.png)
     
 
 
@@ -824,7 +933,7 @@ Let's check it:
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_44_0.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_42_0.png)
     
 
 

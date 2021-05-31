@@ -11,7 +11,9 @@ pi_pl_mass = PiPlus.mass / 1000
 bckg_y = None
 
 
-def bw(x: float, M: float, G: float, amp: float) -> Union[np.ndarray, pd.Series]:
+def bw(
+    x: Union[np.ndarray, pd.Series], M: float, G: float, amp: float
+) -> Union[np.ndarray, pd.Series]:
     """
     Breit-Wigner function with params
     M - mass of a resonance
@@ -29,6 +31,32 @@ def bw(x: float, M: float, G: float, amp: float) -> Union[np.ndarray, pd.Series]
 
 
 def bw_bckg(
-    x: float, M: float, G: float, amp: float, amp_bckg: float
+    x: Union[np.ndarray, pd.Series], M: float, G: float, amp: float, amp_bckg: float
 ) -> Union[np.ndarray, pd.Series]:
     return bw(x=x, M=M, G=G, amp=amp) + amp_bckg * bckg_y
+
+
+def sod(
+    x: Union[np.ndarray, pd.Series], M: float, G: float, amp: float, bterm: float
+) -> Union[np.ndarray, pd.Series]:
+
+    # rho mass-dependent width
+    val = ((x * 2 - 4 * pi_pl_mass ** 2) / (M ** 2 - 4 * pi_pl_mass ** 2)) ** 1.5
+    mdwidth = G * (M / x) * val  # mass dependent width
+    ix = complex(0, 1)
+    denom = x ** 2 - M ** 2 + ix * M ** 2 * mdwidth
+    aterm = amp * np.sqrt(x * M * mdwidth) / denom
+    total = (aterm + bterm) ** 2
+    return np.abs(total)
+
+
+def sod_bckg(
+    x: Union[np.ndarray, pd.Series],
+    M: float,
+    G: float,
+    amp: float,
+    bterm: float,
+    amp_bckg: float,
+) -> Union[np.ndarray, pd.Series]:
+    return sod(x=x, M=M, G=G, amp=amp, bterm=bterm) + amp_bckg * bckg_y
+
