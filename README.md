@@ -129,7 +129,7 @@ Tracks:
   </thead>
   <tbody>
     <tr>
-      <th>4tr_zq</th>
+      <th>zero net charge event $p_T$</th>
       <td>19456.0</td>
       <td>0.837667</td>
       <td>12.995872</td>
@@ -140,7 +140,7 @@ Tracks:
       <td>1726.771484</td>
     </tr>
     <tr>
-      <th>4tr_nzq</th>
+      <th>non-zero net charge event $p_T$</th>
       <td>13762.0</td>
       <td>1.163582</td>
       <td>12.508871</td>
@@ -167,15 +167,8 @@ Tracks:
     
 
 
-
-
-    Text(0, 1, '#events / 20MeV')
-
-
-
-
     
-![png](4TracksAnalysis_files/4TracksAnalysis_4_2.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_4_1.png)
     
 
 
@@ -269,7 +262,14 @@ ZDC again allows us to make signal more clear. Neutrons in ZDC could be a marker
     
 
 
-Beside energy distirbution we also have to make corrections for ZDC timing:
+    No handles with labels found to put in legend.
+    
+
+
+    
+![png](4TracksAnalysis_files/4TracksAnalysis_18_1.png)
+    
+
 
     No handles with labels found to put in legend.
     
@@ -277,6 +277,17 @@ Beside energy distirbution we also have to make corrections for ZDC timing:
 
     
 ![png](4TracksAnalysis_files/4TracksAnalysis_19_1.png)
+    
+
+
+Beside energy distirbution we also have to make corrections for ZDC timing:
+
+    No handles with labels found to put in legend.
+    
+
+
+    
+![png](4TracksAnalysis_files/4TracksAnalysis_21_1.png)
     
 
 
@@ -348,7 +359,7 @@ Event called passed ZDC cuts if satisfied such criteria:
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_21_1.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_23_1.png)
     
 
 
@@ -417,7 +428,73 @@ Event called passed ZDC cuts if satisfied such criteria:
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_23_1.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_25_1.png)
+    
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>zero net charge event $p_t$</th>
+      <td>6605.0</td>
+      <td>0.408039</td>
+      <td>2.210536</td>
+      <td>0.000275</td>
+      <td>0.071012</td>
+      <td>0.281112</td>
+      <td>0.548197</td>
+      <td>176.975204</td>
+    </tr>
+    <tr>
+      <th>non-zero net charge event $p_t$</th>
+      <td>13762.0</td>
+      <td>1.163582</td>
+      <td>12.508871</td>
+      <td>0.010555</td>
+      <td>0.386721</td>
+      <td>0.648763</td>
+      <td>1.049536</td>
+      <td>1328.583740</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+    
+![png](4TracksAnalysis_files/4TracksAnalysis_26_1.png)
     
 
 
@@ -503,7 +580,7 @@ Let's see on the mass distribution of the events
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_27_1.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_30_1.png)
     
 
 
@@ -583,18 +660,15 @@ Here we can plot two distirbutions:
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_30_1.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_33_1.png)
     
 
 
 As we can see above, for second case (all possible pairs) we've got stronger signal in comparison with light-recoil pair as it made in [STAR work](http://arxiv.org/abs/0912.0604v2). Let's build 2d distirbuition and marginals component separately:
 
-    No handles with labels found to put in legend.
-    
-
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_32_1.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_35_0.png)
     
 
 
@@ -603,142 +677,83 @@ First of all let's try to fit $\rho(0)$ that we can see as heavy pair of final 4
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_34_0.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_37_0.png)
     
 
 
-    D:\GoogleDrive\Job\cern\Alice\analysis\dev\physics\notebooks\FourTracks\analysis\fit.py:24: RuntimeWarning: invalid value encountered in sqrt
-      q = np.sqrt((x ** 2) / 4 - pi_pl_mass ** 2)
-    D:\GoogleDrive\Job\cern\Alice\analysis\dev\physics\notebooks\FourTracks\analysis\fit.py:24: RuntimeWarning: invalid value encountered in sqrt
-      q = np.sqrt((x ** 2) / 4 - pi_pl_mass ** 2)
+    C:\Users\bdrum\Anaconda3\envs\hep\lib\site-packages\lmfit\minimizer.py:857: RuntimeWarning: invalid value encountered in sqrt
+      (par.stderr * np.sqrt(self.result.covar[jvar, jvar])))
+    C:\Users\bdrum\Anaconda3\envs\hep\lib\site-packages\lmfit\minimizer.py:850: RuntimeWarning: invalid value encountered in sqrt
+      par.stderr = np.sqrt(self.result.covar[ivar, ivar])
     
 
     [[Model]]
-        (Model(bw_bckg, prefix='bw_') + Model(polynomial, prefix='bckg_'))
+        (Model(bw, prefix='bw_') + Model(polynomial, prefix='bckg_'))
     [[Fit Statistics]]
-        # fitting method   = leastsq
-        # function evals   = 30
-        # data points      = 98
+        # fitting method   = Nelder-Mead
+        # function evals   = 766
+        # data points      = 50
         # variables        = 9
-        chi-square         = 6005.22121
-        reduced chi-square = 67.4743956
-        Akaike info crit   = 421.310875
-        Bayesian info crit = 444.575582
+        chi-square         = 40.7026433
+        reduced chi-square = 0.99274740
+        Akaike info crit   = 7.71350158
+        Bayesian info crit = 24.9217086
     ##  Warning: uncertainties could not be estimated:
-        bw_G:         at initial value
-        bw_amp:       at initial value
-        bckg_c0:      at initial value
-        bckg_c1:      at initial value
-        bckg_c3:      at initial value
-        bckg_c4:      at initial value
-        bckg_c5:      at initial value
     [[Variables]]
-        bw_M:         0.76755874 (init = 0.77)
-        bw_G:         0.15000000 (init = 0.15)
-        bw_amp:       165.000000 (init = 165)
-        bw_amp_bckg:  0 (fixed)
-        bckg_c0:     -138.848812 (init = -138.8488)
-        bckg_c1:      739.990410 (init = 739.9904)
-        bckg_c2:     -748.736499 (init = -748.6897)
-        bckg_c3:     -75.0224404 (init = -75.02244)
-        bckg_c4:      358.446762 (init = 358.4468)
-        bckg_c5:     -111.293216 (init = -111.2932)
+        bw_M:     0.76257570 +/- 0.00278473 (0.37%) (init = 0.77)
+        bw_G:     0.17054290 +/- 0.00407858 (2.39%) (init = 0.17)
+        bw_amp:   220.155833 +/- 0.07016377 (0.03%) (init = 230)
+        bckg_c0:  375.237149 +/- 0.33459047 (0.09%) (init = 374.961)
+        bckg_c1: -2511.03059 +/- 0.03314420 (0.00%) (init = -2493.255)
+        bckg_c2:  7312.39507 +/- 0.03578421 (0.00%) (init = 7288.046)
+        bckg_c3: -9574.79936 +/-        nan (nan%) (init = -9558.787)
+        bckg_c4:  5677.15511 +/-        nan (nan%) (init = 5664.544)
+        bckg_c5: -1250.88619 +/- 0.00275394 (0.00%) (init = -1244.663)
+    [[Correlations]] (unreported correlations are < 0.100)
+        C(bw_G, bckg_c0) = -0.334
     
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_35_2.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_38_2.png)
     
 
+
+    C:\Users\bdrum\Anaconda3\envs\hep\lib\site-packages\lmfit\minimizer.py:850: RuntimeWarning: invalid value encountered in sqrt
+      par.stderr = np.sqrt(self.result.covar[ivar, ivar])
+    C:\Users\bdrum\Anaconda3\envs\hep\lib\site-packages\lmfit\minimizer.py:857: RuntimeWarning: invalid value encountered in sqrt
+      (par.stderr * np.sqrt(self.result.covar[jvar, jvar])))
+    
 
     [[Model]]
-        (Model(bw_bckg, prefix='bw_') + Model(polynomial, prefix='bckg_'))
+        ((Model(bw, prefix='bw1_') + Model(bw, prefix='bw2_')) + Model(polynomial, prefix='bckg_'))
     [[Fit Statistics]]
-        # fitting method   = leastsq
-        # function evals   = 30
-        # data points      = 65
-        # variables        = 9
-        chi-square         = 9415.11713
-        reduced chi-square = 168.127092
-        Akaike info crit   = 341.419500
-        Bayesian info crit = 360.988985
+        # fitting method   = Nelder-Mead
+        # function evals   = 1485
+        # data points      = 30
+        # variables        = 11
+        chi-square         = 25.8808301
+        reduced chi-square = 1.36214895
+        Akaike info crit   = 17.5691549
+        Bayesian info crit = 32.9823261
     ##  Warning: uncertainties could not be estimated:
-        bw_G:         at initial value
-        bw_amp:       at initial value
-        bckg_c0:      at initial value
-        bckg_c1:      at initial value
-        bckg_c2:      at initial value
-        bckg_c4:      at initial value
-        bckg_c5:      at initial value
     [[Variables]]
-        bw_M:         1.53480217 (init = 1.55)
-        bw_G:         0.40000000 (init = 0.4)
-        bw_amp:       110.000000 (init = 110)
-        bw_amp_bckg:  0 (fixed)
-        bckg_c0:     -140.522813 (init = -140.5228)
-        bckg_c1:      545.656453 (init = 545.6565)
-        bckg_c2:     -750.360538 (init = -750.3605)
-        bckg_c3:      509.493396 (init = 509.5222)
-        bckg_c4:     -171.189120 (init = -171.1891)
-        bckg_c5:      22.4927273 (init = 22.49273)
+        bw1_M:    1.38115837 +/-        nan (nan%) (init = 1.4)
+        bw1_G:    0.26730196 +/-        nan (nan%) (init = 0.2)
+        bw1_amp:  115.902720 +/-        nan (nan%) (init = 150)
+        bw2_M:    1.58211568 +/-        nan (nan%) (init = 1.55)
+        bw2_G:    0.28454224 +/-        nan (nan%) (init = 0.3)
+        bw2_amp:  95.5333644 +/-        nan (nan%) (init = 135)
+        bckg_c0:  135.876946 +/-        nan (nan%) (init = 159.0529)
+        bckg_c1: -531.778166 +/-        nan (nan%) (init = -502.5231)
+        bckg_c2:  693.204812 +/- 0.03743163 (0.01%) (init = 626.8528)
+        bckg_c3: -341.989204 +/-        nan (nan%) (init = -321.2902)
+        bckg_c4:  56.3015457 +/- 0.01892836 (0.03%) (init = 57.279)
     
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_36_1.png)
-    
-
-
-    [[Model]]
-        ((Model(bw_bckg, prefix='bw1_') + Model(bw_bckg, prefix='bw2_')) + Model(polynomial, prefix='bckg_'))
-    [[Fit Statistics]]
-        # fitting method   = leastsq
-        # function evals   = 65
-        # data points      = 65
-        # variables        = 12
-        chi-square         = 7381.36207
-        reduced chi-square = 139.270982
-        Akaike info crit   = 331.601203
-        Bayesian info crit = 357.693850
-    ##  Warning: uncertainties could not be estimated:
-        bw1_M:         at initial value
-        bw1_G:         at initial value
-        bw1_amp:       at initial value
-        bw2_M:         at initial value
-        bw2_G:         at initial value
-        bw2_amp:       at initial value
-        bckg_c0:       at initial value
-        bckg_c1:       at initial value
-        bckg_c2:       at initial value
-        bckg_c4:       at initial value
-        bckg_c5:       at initial value
-    [[Variables]]
-        bw1_M:         1.45000000 (init = 1.45)
-        bw1_G:         0.30000000 (init = 0.3)
-        bw1_amp:       90.0000000 (init = 90)
-        bw1_amp_bckg:  0 (fixed)
-        bw2_M:         1.70000000 (init = 1.7)
-        bw2_G:         0.40000000 (init = 0.4)
-        bw2_amp:       40.0000000 (init = 40)
-        bw2_amp_bckg:  0 (fixed)
-        bckg_c0:      -140.522813 (init = -140.5228)
-        bckg_c1:       545.656453 (init = 545.6565)
-        bckg_c2:      -750.360538 (init = -750.3605)
-        bckg_c3:       509.359668 (init = 509.5222)
-        bckg_c4:      -171.189120 (init = -171.1891)
-        bckg_c5:       22.4927273 (init = 22.49273)
-    
-
-
-
-
-    <matplotlib.legend.Legend at 0x2092dbba2e0>
-
-
-
-
-    
-![png](4TracksAnalysis_files/4TracksAnalysis_37_2.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_40_2.png)
     
 
 
@@ -933,7 +948,7 @@ Let's check it:
 
 
     
-![png](4TracksAnalysis_files/4TracksAnalysis_42_0.png)
+![png](4TracksAnalysis_files/4TracksAnalysis_45_0.png)
     
 
 
