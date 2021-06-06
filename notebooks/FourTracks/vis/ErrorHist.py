@@ -13,6 +13,7 @@ def DrawErrorHists(
     y_label: list,
     color: list,
     showBinWidth: bool = True,
+    xerr: bool = True,
 ) -> pd.DataFrame:
     """
     """
@@ -32,6 +33,7 @@ def DrawErrorHists(
         hep.histplot(
             np.histogram(data[i], bins=bins, range=range),
             yerr=True,
+            xerr=xerr,
             color=color[i],
             histtype="errorbar",
             label=label[i],
@@ -41,7 +43,7 @@ def DrawErrorHists(
         ax.set_xlabel(x_label[i])
         ylabel = y_label[i]
         if showBinWidth:
-            ylabel = ylabel + "/" + f"{val}MeV"
+            ylabel = ylabel + " per " + f"{val:.0f} MeV/c"
         ax.set_ylabel(ylabel)
 
     _ = plt.legend()
@@ -58,6 +60,7 @@ def DrawErrorHist(
     y_label: str,
     color: str,
     showBinWidth: bool = True,
+    xerr: bool = True,
 ):
     return DrawErrorHists(
         [data],
@@ -69,5 +72,6 @@ def DrawErrorHist(
         y_label=[y_label],
         color=[color],
         showBinWidth=showBinWidth,
+        xerr=xerr,
     )
 
