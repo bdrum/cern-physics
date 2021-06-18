@@ -5,16 +5,23 @@ from os.path import exists, join
 
 
 def GetTriggeredEvents(
-    tracks: pd.DataFrame, fileName: str = "", saveToFile: bool = False
+    tracks: pd.DataFrame,
+    dataPath: str = r"D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime",
+    year: int = 2015,
+    fileName: str = "",
+    rewrite: bool = False,
 ) -> pd.DataFrame:
     """
-    Method get events with four tracks and check fake trigger events
+    Method gets events with four tracks and checks fake trigger events
     """
 
-    pth = join(r"D:\GoogleDrive\Job\cern\Alice\analysis\data\RhoPrime\2015", fileName)
+    pth = join(dataPath, str(year), fileName)
 
-    if exists(pth) and fileName:
+    if exists(pth) and not rewrite and fileName:
         return pd.read_parquet(pth)
+
+    if not fileName:
+        raise NameError("The name of file should not be empty for saving purposes")
 
     # fired FORs numbers for 4 zq tracks
     for_sensors = pd.DataFrame(
@@ -73,9 +80,14 @@ def GetTriggeredEvents(
     # df_dbg = df.copy()
 
     # take only matched tracks and fill vPhi arrays for inner and outer
-    # df = df[(df.Inner_matched.apply(any) | df.Outer_matched.apply(any))][['entry', 'vPhiInner', 'vPhiOuter']].groupby('entry').sum()
+    # df = (
+    #     df[(df.Inner_matched.apply(any) | df.Outer_matched.apply(any))][
+    #         ["entry", "vPhiInner", "vPhiOuter"]
+    #     ]
+    #     .groupby("entry")
+    #     .sum()
+    # )
     df = df[["entry", "vPhiInner", "vPhiOuter"]].groupby("entry").sum()
-
     df["triggered"] = False
 
     # check incorrect topology
@@ -100,10 +112,13 @@ def GetTriggeredEvents(
                 ):
                     df.at[t, "triggered"] = True
 
-    tdf = pd.DataFrame(df.index[~df.triggered], columns=["Untriggered"]).join(
-        pd.DataFrame(df.index[df.triggered], columns=["Triggered"]), how="left"
-    )
+    tdf = pd.DataFrame.from_dict(
+        {
+            "triggered": df.triggered[df.triggered].index.values,
+            "untriggered": pd.Series(df.triggered[~df.triggered].index.values),
+        },
+        orient="index",
+    ).T
 
-    if saveToFile:
-        tdf.to_parquet(pth)
+    tdf.to_parquet(pth)
     return tdf
